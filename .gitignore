@@ -6,6 +6,7 @@
 
 # Ignore idea folder
 .idea/
+coverage/
 # Ignore bundler config.
 /.bundle
 
