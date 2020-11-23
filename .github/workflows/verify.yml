@@ -1,5 +1,12 @@
 name: Verify
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - develop
 
 jobs:
   tests:
