@@ -16,6 +16,9 @@ gem 'puma', '~> 4.1'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# devise auth token for user authentication
+gem 'devise_token_auth'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -35,6 +38,15 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # rspec as the main test framework
+  gem 'rspec-rails', '~> 4.0.1'
+  # FactoryBot for factory pattern
+  gem 'factory_bot_rails'
+end
+
+group :test do
+  # SimpleCov for test coverage
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
