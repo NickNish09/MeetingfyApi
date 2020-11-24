@@ -9,6 +9,6 @@ class Meeting < ApplicationRecord
   def end_date_is_after_start_date
     return if meeting_end.blank? || meeting_start.blank?
 
-    errors.add(:meeting_end, 'cannot be before the meeting end') if meeting_end < meeting_start
+    errors.add(:meeting_end, 'Fim da reunião deve ser depois do começo') if meeting_end < meeting_start
   end
 end
