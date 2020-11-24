@@ -44,10 +44,18 @@ RSpec.describe "V1::Rooms", type: :request do
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
-      room = create(:room)
+    before do
+      room = create(:room_with_meetings)
       get v1_room_url(room), as: :json
+    end
+
+    it "renders a successful response" do
       expect(response).to have_http_status(:success)
+    end
+
+    it 'returns the meetings for that room' do
+      expect(JSON.parse(response.body)['meetings']).to_not be_nil
+      expect(JSON.parse(response.body)['meetings'].length).to eq 3
     end
   end
 

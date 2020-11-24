@@ -12,7 +12,7 @@ module V1
 
     # GET /v1/rooms/1
     def show
-      render json: @room
+      render json: @room, include: [:meetings]
     end
 
     # POST /v1/rooms
