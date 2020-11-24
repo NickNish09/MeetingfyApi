@@ -6,11 +6,12 @@ RSpec.describe "V1::Meetings", type: :request do
     @user.create_new_auth_token
   }
 
+  let(:date_aux) { DateTime.next.noon } # gets next monday by default
+
   describe "POST /create" do
     context "with user authenticated" do
       context "when there are schedule conflicts" do
         before do
-          date_aux = DateTime.now.advance(hours: 1)
           @room = create(:room)
           # creating a date with 3 hours range
           @meeting = create(:meeting, room: @room,
@@ -36,7 +37,6 @@ RSpec.describe "V1::Meetings", type: :request do
 
       context "when there are NO schedule conflicts" do
         before do
-          date_aux = DateTime.now.advance(hours: 1)
           @room = create(:room)
           # creating a date with 3 hours range
           @meeting = create(:meeting, room: @room,
@@ -62,7 +62,6 @@ RSpec.describe "V1::Meetings", type: :request do
 
       context "with invalid params" do
         before do
-          date_aux = DateTime.now.advance(hours: 1)
           @room = create(:room)
           invalid_params = {
               meeting_start: date_aux,

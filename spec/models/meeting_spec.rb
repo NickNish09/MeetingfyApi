@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Meeting, type: :model do
   context 'model validations' do
+    let(:date_aux) { DateTime.next.noon } # gets next monday by default
     it 'is valid with valid attributes' do
       meeting = build(:meeting)
       expect(meeting).to be_valid
@@ -23,15 +24,19 @@ RSpec.describe Meeting, type: :model do
     end
 
     it 'is not valid with a start date greater then end date' do
-      date_aux = DateTime.now
       meeting = build(:meeting, meeting_start: date_aux + 1, meeting_end: date_aux)
       expect(meeting).to_not be_valid
     end
 
     it 'is not valid with a start date previous to now' do
-      date_aux = DateTime.now
       # trying to create a meeting for 2 hours ago
-      meeting = build(:meeting, meeting_start: date_aux.advance(hours: -2), meeting_end: date_aux.advance(hours: -1))
+      meeting = build(:meeting, meeting_start: DateTime.now.advance(hours: -2), meeting_end: DateTime.now.advance(hours: -1))
+      expect(meeting).to_not be_valid
+    end
+
+    it 'is not valid if datetime is not a commercial hour' do
+      # trying to create a meeting for 2 hours ago
+      meeting = build(:meeting, meeting_start: date_aux.advance(hours: 8), meeting_end: date_aux.advance(hours: 9)) # out of commercial time
       expect(meeting).to_not be_valid
     end
   end

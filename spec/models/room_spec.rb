@@ -1,49 +1,48 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
+  let(:date_aux) { DateTime.next.noon } # gets next monday by default
+
   describe "#available?" do
     context "when the meeting_start is between other meeting schedule" do
       before do
-        @date_aux = DateTime.now.advance(hours: 1)
         @room = create(:room)
         # creating a date with 3 hours range
         @meeting = create(:meeting, room: @room,
-                          meeting_start: @date_aux, meeting_end: @date_aux.advance(hours: 3))
+                          meeting_start: date_aux, meeting_end: date_aux.advance(hours: 3))
       end
 
       it 'returns false' do
         # advancing meeting_start in 1 hour to be between the meeting schedule
-        expect(@room.available?(@date_aux.advance(hours: 1), @date_aux.advance(hours: 4))).to be_falsey
+        expect(@room.available?(date_aux.advance(hours: 1), date_aux.advance(hours: 4))).to be_falsey
       end
     end
 
     context "when the meeting_end is between other meeting schedule" do
       before do
-        @date_aux = DateTime.now.advance(hours: 1)
         @room = create(:room)
         # creating a date with 3 hours range
         @meeting = create(:meeting, room: @room,
-                          meeting_start: @date_aux, meeting_end: @date_aux.advance(hours: 3))
+                          meeting_start: date_aux, meeting_end: date_aux.advance(hours: 3))
       end
 
       it 'returns false' do
         # advancing meeting_start in 1 hour to be between the meeting schedule
-        expect(@room.available?(@date_aux.advance(hours: 1), @date_aux.advance(hours: 2))).to be_falsey
+        expect(@room.available?(date_aux.advance(hours: 1), date_aux.advance(hours: 2))).to be_falsey
       end
     end
 
     context "when start and end are not between other meeting schedule" do
       before do
-        @date_aux = DateTime.now.advance(hours: 1)
         @room = create(:room)
         # creating a date with 3 hours range
         @meeting = create(:meeting, room: @room,
-                          meeting_start: @date_aux, meeting_end: @date_aux.advance(hours: 3))
+                          meeting_start: date_aux, meeting_end: date_aux.advance(hours: 3))
       end
 
       it 'returns true' do
         # advancing meeting_start in 1 hour to be between the meeting schedule
-        expect(@room.available?(@date_aux.advance(hours: 4), @date_aux.advance(hours: 6))).to be_truthy
+        expect(@room.available?(date_aux.advance(hours: 4), date_aux.advance(hours: 6))).to be_truthy
       end
     end
   end
