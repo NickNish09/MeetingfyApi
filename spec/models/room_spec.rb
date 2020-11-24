@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
+  describe "#available?" do
+    context "when the meeting_start is between other meeting schedule" do
+      before do
+        @date_aux = DateTime.now
+        @room = create(:room)
+        # creating a date with 3 hours range
+        @meeting = create(:meeting, room: @room,
+                          meeting_start: @date_aux, meeting_end: @date_aux.advance(hours: 3))
+      end
+
+      it 'returns false' do
+        # advancing meeting_start in 1 hour to be between the meeting schedule
+        expect(@room.available?(@date_aux.advance(hours: 1), @date_aux.advance(hours: 2))).to be_falsey
+      end
+    end
+  end
+  
   context 'model validations' do
     it 'is valid with valid attributes' do
       room = build(:room)
