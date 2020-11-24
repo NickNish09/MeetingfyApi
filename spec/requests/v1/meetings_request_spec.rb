@@ -82,5 +82,26 @@ RSpec.describe "V1::Meetings", type: :request do
         end
       end
     end
+
+    context "without user authenticated" do
+      before do
+        @room = create(:room)
+        valid_params = {
+          meeting_start: date_aux,
+          meeting_end: date_aux.advance(hours: 1),
+          room_id: @room.id,
+          title: "RENOE" # without title
+        }
+        post v1_meetings_path, params: { meeting: valid_params }, headers: {}, as: :json
+      end
+
+      it 'returns unauthorized' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'returns an error message' do
+        expect(JSON.parse(response.body)['error']).to eq "você precisa estar autenticado ter acesso"
+      end
+    end
   end
 end

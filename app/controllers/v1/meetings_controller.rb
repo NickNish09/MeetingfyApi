@@ -1,6 +1,8 @@
 module V1
   class MeetingsController < ApplicationController
     before_action :set_meeting, only: [:update, :destroy]
+    before_action :require_user_authentication, only: [:create, :update, :destroy]
+
     def create
       @meeting = current_user.meetings.new(meeting_params)
       if @meeting.room.available?(@meeting.meeting_start, @meeting.meeting_end)
@@ -31,6 +33,12 @@ module V1
     # Only allow a trusted parameter "white list" through.
     def meeting_params
       params.require(:meeting).permit(:title, :meeting_start, :meeting_end, :user_id, :room_id)
+    end
+
+    def require_user_authentication
+      unless user_signed_in?
+        render json: { error: 'você precisa estar autenticado ter acesso' }, status: :unauthorized
+      end
     end
   end
 end
