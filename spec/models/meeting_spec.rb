@@ -27,5 +27,12 @@ RSpec.describe Meeting, type: :model do
       meeting = build(:meeting, meeting_start: date_aux + 1, meeting_end: date_aux)
       expect(meeting).to_not be_valid
     end
+
+    it 'is not valid with a start date previous to now' do
+      date_aux = DateTime.now
+      # trying to create a meeting for 2 hours ago
+      meeting = build(:meeting, meeting_start: date_aux.advance(hours: -2), meeting_end: date_aux.advance(hours: -1))
+      expect(meeting).to_not be_valid
+    end
   end
 end

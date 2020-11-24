@@ -4,7 +4,7 @@ RSpec.describe Room, type: :model do
   describe "#available?" do
     context "when the meeting_start is between other meeting schedule" do
       before do
-        @date_aux = DateTime.now
+        @date_aux = DateTime.now.advance(hours: 1)
         @room = create(:room)
         # creating a date with 3 hours range
         @meeting = create(:meeting, room: @room,
@@ -19,7 +19,7 @@ RSpec.describe Room, type: :model do
 
     context "when the meeting_end is between other meeting schedule" do
       before do
-        @date_aux = DateTime.now
+        @date_aux = DateTime.now.advance(hours: 1)
         @room = create(:room)
         # creating a date with 3 hours range
         @meeting = create(:meeting, room: @room,
@@ -34,7 +34,7 @@ RSpec.describe Room, type: :model do
 
     context "when start and end are not between other meeting schedule" do
       before do
-        @date_aux = DateTime.now
+        @date_aux = DateTime.now.advance(hours: 1)
         @room = create(:room)
         # creating a date with 3 hours range
         @meeting = create(:meeting, room: @room,
