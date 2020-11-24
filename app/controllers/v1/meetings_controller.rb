@@ -2,6 +2,7 @@ module V1
   class MeetingsController < ApplicationController
     before_action :set_meeting, only: [:update, :destroy]
     before_action :require_user_authentication, only: [:create, :update, :destroy]
+    before_action :require_owner, only: [:update, :destroy]
 
     def create
       @meeting = current_user.meetings.new(meeting_params)
@@ -12,16 +13,20 @@ module V1
           render json: @meeting.errors, status: :unprocessable_entity
         end
       else
-        render json: {msg: 'Sala reservada para este horário.'}, status: :unprocessable_entity
+        render json: { msg: 'Sala reservada para este horário.' }, status: :unprocessable_entity
       end
     end
 
     def update
-
+      if @meeting.update(meeting_params)
+        render json: @meeting
+      else
+        render json: @meeting.errors, status: :unprocessable_entity
+      end
     end
 
     def destroy
-
+      render json: { msg: "Reunião deletada" }, status: :ok if @meeting.destroy
     end
 
     private
@@ -36,8 +41,12 @@ module V1
     end
 
     def require_user_authentication
-      unless user_signed_in?
-        render json: { error: 'você precisa estar autenticado ter acesso' }, status: :unauthorized
+      render json: { error: 'você precisa estar autenticado ter acesso' }, status: :unauthorized unless user_signed_in?
+    end
+
+    def require_owner
+      unless @meeting.user == current_user # if the current user owns the meeting, do nothing
+        render json: { error: 'você precisa ser o organizador da reunião para alterá-la' }, status: :unauthorized
       end
     end
   end
