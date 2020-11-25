@@ -5,7 +5,7 @@ exemplo de requisição: GET https://meetingfy-api.herokuapp.com/v1/rooms
 
 para ver as salas criadas. Mais requisições abaixo na seção requisições.
 
-## Como utilizar
+## Como utilizar localmente
 - Clone este repositório:
 
 ```git clone git@github.com:NickNish09/MeetingfyApi.git```
@@ -42,8 +42,8 @@ os requisitos e uma estrutura do banco de dados:
 
 https://whimsical.com/meetingfy-PuRYrcSneNYZRb3vsqfpKU
 
-O desenvolvimento desta API seguiu um desenvolvimento orientado a testes
-**(Test Driven Development - TDD)**, sendo feitos testes para funções dos models
+O desenvolvimento desta API seguiu um **desenvolvimento orientado a testes
+(Test Driven Development - TDD)**, sendo feitos testes para funções dos models
 e para requisições dos controllers, preferencialmente antes de suas implementações.
 
 **Features:**
