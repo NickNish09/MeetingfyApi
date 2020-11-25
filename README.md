@@ -5,6 +5,28 @@ exemplo de requisição: GET https://meetingfy-api.herokuapp.com/v1/rooms
 
 para ver as salas criadas. Mais requisições abaixo na seção requisições.
 
+## Como utilizar
+- Clone este repositório:
+
+```git clone git@github.com:NickNish09/MeetingfyApi.git```
+
+- Entre na pasta dele:
+
+```cd MeetingfyApi```
+
+- Execute o bundle install para instalar dependências:
+
+```bundle install```
+
+- Execute o comando para setar o banco de dados:
+
+```rails db:setup```
+
+- Rode o servidor e faça uma requisição: 
+
+```rails s```
+
+GET http://localhost:3000/v1/rooms
 ## Features
 - Autenticação via Token
 - Criar/Editar/Excluir/Ver salas
