@@ -13,7 +13,7 @@ module V1
           render json: @meeting.errors, status: :unprocessable_entity
         end
       else
-        render json: { msg: 'Sala reservada para este horário.' }, status: :unprocessable_entity
+        render json: { error: 'Sala reservada para este horário.' }, status: :unprocessable_entity
       end
     end
 

@@ -7,7 +7,7 @@ module V1
     def index
       @rooms = Room.all
 
-      render json: @rooms
+      render json: @rooms.order(id: :asc)
     end
 
     # GET /v1/rooms/1

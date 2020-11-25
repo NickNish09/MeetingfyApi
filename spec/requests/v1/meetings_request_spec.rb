@@ -31,7 +31,7 @@ RSpec.describe "V1::Meetings", type: :request do
         end
 
         it 'returns a error message' do
-          expect(JSON.parse(response.body)['msg']).to eq 'Sala reservada para este horário.'
+          expect(JSON.parse(response.body)['error']).to eq 'Sala reservada para este horário.'
         end
       end
 
