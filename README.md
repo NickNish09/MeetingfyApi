@@ -46,6 +46,10 @@ O desenvolvimento desta API seguiu um **desenvolvimento orientado a testes
 (Test Driven Development - TDD)**, sendo feitos testes para funções dos models
 e para requisições dos controllers, preferencialmente antes de suas implementações.
 
+Foi configurada uma integração contínua com o GitHub Workflows para rodar os testes a cada
+pull request feito para branch Develop ou Master, para serem feitos os merges
+apenas se os testes passarem.
+
 **Features:**
 - Autenticação via Token
 - Criar/Editar/Excluir/Ver salas
@@ -70,6 +74,7 @@ e devem ocorrer em data futura de sua marcação.
 - **Heroku** para hospedagem em produção
 - **Whimsical** Planejamento e Mockup de Telas
 - **Postman** para testar requisições
+- **GitHub Workflows** para integração contínua
 
 ## Requisições
 Alguns exemplos de requisições podem ser feitas pelo POSTMAN, importando
