@@ -27,17 +27,36 @@ para ver as salas criadas. Mais requisições abaixo na seção requisições.
 ```rails s```
 
 GET http://localhost:3000/v1/rooms
-## Features
+
+- Caso queira, você pode rodar os testes do projeto:
+
+```rspec```
+
+e checar a cobertura em coverage/index.html
+## Features e Breve Descrição
+O sistema foi dividido em backend e frontend. O Backend, este, foi feito com Ruby On Rails (API).
+Existem **basicamente 3 Models, um de usuário (User), um para reuniões (Meeting)
+e um para as salas (Room)**. **O planejamento do sistema foi feito no site
+whimsical**, onde antes de seu desenvolvimento foram feitas algumas telas e levantados
+os requisitos e uma estrutura do banco de dados:
+
+https://whimsical.com/meetingfy-PuRYrcSneNYZRb3vsqfpKU
+
+O desenvolvimento desta API seguiu um desenvolvimento orientado a testes
+**(Test Driven Development - TDD)**, sendo feitos testes para funções dos models
+e para requisições dos controllers, preferencialmente antes de suas implementações.
+
+**Features:**
 - Autenticação via Token
 - Criar/Editar/Excluir/Ver salas
 - Reservar salas para reuniões
 
-As salas podem ser criadas, editadas e deletadas apenas por usuários autenticados. Qualquer usuário pode ver a listagem de salas.
+**As salas podem ser criadas, editadas e deletadas** apenas por usuários autenticados. Qualquer usuário pode ver a listagem de salas.
 
-As reuniões só podem ser vistas, marcadas, deletadas por usuários autenticados.
+**As reuniões só podem ser vistas, marcadas, deletadas** por usuários autenticados.
 Apenas usuários que criaram a reunião podem deletá-la.
 
-Todas as reuniões tem validação para acontecer no horário comercial (8:00 - 18:00)
+**Todas as reuniões tem validação para acontecer no horário comercial (8:00 - 18:00)**
 e devem ocorrer em data futura de sua marcação.
 
 ## Tecnologias Utilizadas
@@ -49,6 +68,8 @@ e devem ocorrer em data futura de sua marcação.
 - **DeviseAuthToken** para autenticação via token
 - **FFaker** para seeds de dados para testes
 - **Heroku** para hospedagem em produção
+- **Whimsical** Planejamento e Mockup de Telas
+- **Postman** para testar requisições
 
 ## Requisições
 Alguns exemplos de requisições podem ser feitas pelo POSTMAN, importando
