@@ -8,7 +8,7 @@ para ver as salas criadas. Mais requisições abaixo na seção requisições.
 ## Como utilizar localmente
 - Clone este repositório:
 
-```git clone git@github.com:NickNish09/MeetingfyApi.git```
+```git clone https://github.com/NickNish09/MeetingfyApi.git```
 
 - Entre na pasta dele:
 
